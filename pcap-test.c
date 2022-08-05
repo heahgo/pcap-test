@@ -82,7 +82,7 @@ int main(int argc, char* argv[]) {
 
 		ETH_HEAD *eth = (ETH_HEAD *)packet;
 		IP_HEAD *ip = (IP_HEAD *)(packet + sizeof(ETH_HEAD));
-		uint16_t ip_total_len = ip->tot_len / 256;
+		uint16_t ip_total_len = ntohs(ip->tot_len);
 		uint16_t ip_head_len = (ip->ver_headLen & 15) * 4;
 		TCP_HEAD *tcp = (TCP_HEAD *)(packet + sizeof(ETH_HEAD) + ip_head_len);
 		uint16_t tcp_head_len = (tcp->offset_reserved >> 4) * 4;
